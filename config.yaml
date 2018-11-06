@@ -1,0 +1,29 @@
+IP: 127.0.0.1
+Port: 18888
+#LogFile: 
+
+CacheTTL: 48h   # accepts s, m, h, w and complex 36h12m, 4w2d3h 
+CacheSyncTime: 2h
+#CacheReleaseTime: 30m
+
+DbPoolSize: 5
+Workers: 2	# resolvers at time (goroutines using database connections only. Resolving from cache -> unlimited)
+
+AllowFrom:
+  - 127.0.0.1
+  - 10.255.0.0/16
+  - 172.17.0.1
+  
+clouds:
+    # required: name, release, dbURL
+  - name: cloud1 
+    release: liberty
+    dbURL: user:password@(ip:port)/nova
+  
+  - name: cloud2
+    release: mitaka
+    dbURL:
+
+  - name: cloud3
+    release: pike
+    dbURL: password:user@(ip:port)/nova

@@ -1,0 +1,40 @@
+image: "artifactory:17000/gitlab/go:custom"
+
+stages:
+  - build
+  #- deploy
+  
+variables:
+  CI_PROJECT_DIR: /go/src/resolver
+
+
+
+build_and_run:
+  #tags:
+  #  - cloud
+  #  - ops
+  only:
+    - /^golang*/
+    - /^master$/
+    - /^develop$/
+  stage: build
+  script:
+    - CI/run.sh
+  artifacts:
+    paths:  
+      - ./resolver
+    expire_in: 90 mins
+
+
+#deploy:
+#  stage: deploy
+#  when: on_success
+#  only:
+#    -  /^golang*/
+#    - /^master$/
+#  environment: 
+#    name: production
+#  script:
+#    - DEPLOY/deploy.sh
+
+    
